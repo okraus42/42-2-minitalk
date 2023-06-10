@@ -6,7 +6,7 @@
 /*   By: okraus <okraus@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 15:36:48 by okraus            #+#    #+#             */
-/*   Updated: 2023/05/14 15:39:32 by okraus           ###   ########.fr       */
+/*   Updated: 2023/06/10 18:51:05 by okraus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,11 @@ int	ft_handler3(int i)
 	return (128);
 }
 
+void	ft_handler_2(char c)
+{
+	ft_printf("%c", c);
+}
+
 void	ft_handler(int sig, siginfo_t *info, void *s)
 {
 	static unsigned char	c;
@@ -58,7 +63,7 @@ void	ft_handler(int sig, siginfo_t *info, void *s)
 	if (i == 8)
 	{
 		if (c != 4)
-			ft_printf("%c", c);
+			ft_handler_2(c);
 		else
 		{
 			kill(info->si_pid, SIGUSR1);
@@ -84,7 +89,7 @@ int	main(void)
 	sigaction(SIGUSR2, &sigact, NULL);
 	while (pid)
 	{
-		sleep(1);
+		sleep(5);
 	}
 	ft_printf("FATAL ERROR\n");
 	return (0);
