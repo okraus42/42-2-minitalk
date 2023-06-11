@@ -6,7 +6,7 @@
 /*   By: okraus <okraus@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 15:36:48 by okraus            #+#    #+#             */
-/*   Updated: 2023/06/10 18:51:05 by okraus           ###   ########.fr       */
+/*   Updated: 2023/06/11 10:58:08 by okraus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,6 @@ int	ft_handler3(int i)
 	return (128);
 }
 
-void	ft_handler_2(char c)
-{
-	ft_printf("%c", c);
-}
-
 void	ft_handler(int sig, siginfo_t *info, void *s)
 {
 	static unsigned char	c;
@@ -58,12 +53,12 @@ void	ft_handler(int sig, siginfo_t *info, void *s)
 	else if (sig == SIGUSR2)
 		c += 0;
 	else
-		ft_printf("ERROR: Caugh another signal = %d?!\n", sig);
+		ft_printf_fd(2, "ERROR: Caugh another signal = %d?!\n", sig);
 	i++;
 	if (i == 8)
 	{
 		if (c != 4)
-			ft_handler_2(c);
+			write (1, &c, 1);
 		else
 		{
 			kill(info->si_pid, SIGUSR1);

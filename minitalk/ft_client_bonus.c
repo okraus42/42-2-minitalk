@@ -6,7 +6,7 @@
 /*   By: okraus <okraus@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 15:36:31 by okraus            #+#    #+#             */
-/*   Updated: 2023/06/10 18:50:58 by okraus           ###   ########.fr       */
+/*   Updated: 2023/06/11 11:05:21 by okraus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ft_send_bit(int pid, unsigned char c)
 		kill(pid, SIGUSR1);
 	else
 		kill(pid, SIGUSR2);
-	usleep(500);
+	usleep(750);
 }
 
 // 00000001	=	1
@@ -70,7 +70,9 @@ int	main(int argc, char *argv[])
 	}
 	else
 	{
-		ft_printf("FATAL ERROR\n");
+		ft_printf_fd(2, "%9C      FATAL   ERROR      %0C\n");
+		ft_printf_fd(2, "%9C                         %0C\n");
+		ft_printf_fd(2, "%8CWRONG NUMBER OF ARGUMENTS%0C\n");
 		return (1);
 	}
 	return (0);
