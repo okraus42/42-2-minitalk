@@ -6,7 +6,7 @@
 /*   By: okraus <okraus@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 15:36:31 by okraus            #+#    #+#             */
-/*   Updated: 2023/06/11 11:15:14 by okraus           ###   ########.fr       */
+/*   Updated: 2023/06/13 18:42:27 by okraus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_confirm_msg(int sig)
 {
 	if (sig == SIGUSR1)
-		ft_printf("Message received by the server.\n");
+		ft_printf("%2CMessage received by the server.%0C\n");
 	else if (sig != SIGUSR2)
 		ft_printf_fd(2, "ERROR: Caugh another signal = %d?!\n", sig);
 }

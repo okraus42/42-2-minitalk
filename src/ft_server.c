@@ -6,7 +6,7 @@
 /*   By: okraus <okraus@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 15:36:48 by okraus            #+#    #+#             */
-/*   Updated: 2023/05/14 15:10:20 by okraus           ###   ########.fr       */
+/*   Updated: 2023/06/13 18:41:16 by okraus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,29 @@ int	ft_handler3(int i)
 	return (128);
 }
 
-void	ft_handler(int sig)
+void	ft_handler(int sig, siginfo_t *info, void *s)
 {
 	static unsigned char	c;
 	static int				i;
 	int						x;
 
+	(void)s;
 	x = ft_handler3(i);
 	if (sig == SIGUSR1)
 		c += x;
 	else if (sig == SIGUSR2)
 		c += 0;
 	else
-		ft_printf("ERROR: Caugh another signal = %d?!\n", sig);
+		ft_printf_fd(2, "ERROR: Caugh another signal = %d?!\n", sig);
 	i++;
 	if (i == 8)
 	{
-		ft_printf("%c", c);
+		if (c != 4)
+			write (1, &c, 1);
+		else
+		{
+			kill(info->si_pid, SIGUSR1);
+		}
 		c = 0;
 		i = 0;
 	}
@@ -66,15 +72,19 @@ void	ft_handler(int sig)
 
 int	main(void)
 {
-	pid_t	pid;
+	pid_t				pid;
+	struct sigaction	sigact;
 
 	pid = getpid();
 	ft_printf("Server pid is: %i\n", pid);
-	signal(SIGUSR1, ft_handler);
-	signal(SIGUSR2, ft_handler);
+	sigact.sa_sigaction = ft_handler;
+	sigemptyset(&sigact.sa_mask);
+	sigact.sa_flags = SA_SIGINFO;
+	sigaction(SIGUSR1, &sigact, NULL);
+	sigaction(SIGUSR2, &sigact, NULL);
 	while (pid)
 	{
-		sleep(1);
+		sleep(5);
 	}
 	ft_printf("FATAL ERROR\n");
 	return (0);
