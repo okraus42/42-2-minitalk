@@ -6,7 +6,7 @@
 /*   By: okraus <okraus@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 15:36:31 by okraus            #+#    #+#             */
-/*   Updated: 2023/06/13 18:42:39 by okraus           ###   ########.fr       */
+/*   Updated: 2023/06/15 16:59:58 by okraus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,19 @@
 void	ft_confirm_msg(int sig)
 {
 	if (sig == SIGUSR1)
-		ft_printf("%2CMessage received by the server.%0C\n");
+		ft_printf("%6CMessage received by the server.%0C\n");
 	else if (sig != SIGUSR2)
 		ft_printf_fd(2, "ERROR: Caugh another signal = %d?!\n", sig);
 }
 
 void	ft_send_bit(int pid, unsigned char c)
 {
+	usleep(1);
 	if (c)
 		kill(pid, SIGUSR1);
 	else
 		kill(pid, SIGUSR2);
-	usleep(750);
+	usleep(50000);
 }
 
 // 00000001	=	1
@@ -60,6 +61,7 @@ int	main(int argc, char *argv[])
 	{
 		pid = ft_atoi(argv[1]);
 		signal(SIGUSR1, ft_confirm_msg);
+		signal(SIGUSR2, ft_confirm_msg);
 		while (argv[2][i])
 		{
 			ft_send_char(pid, argv[2][i]);

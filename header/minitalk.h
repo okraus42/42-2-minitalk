@@ -6,7 +6,7 @@
 /*   By: okraus <okraus@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 15:43:08 by okraus            #+#    #+#             */
-/*   Updated: 2023/05/14 15:10:11 by okraus           ###   ########.fr       */
+/*   Updated: 2023/06/15 14:49:35 by okraus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 // INCLUDES
 
-#include <signal.h>
+# include <signal.h>
 # include "../libft/header/libft.h"
 
 // DEFINITIONS

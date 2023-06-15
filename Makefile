@@ -6,7 +6,7 @@
 #    By: okraus <okraus@student.42prague.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/04 15:40:17 by okraus            #+#    #+#              #
-#    Updated: 2023/06/13 18:39:14 by okraus           ###   ########.fr        #
+#    Updated: 2023/06/15 14:52:07 by okraus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,6 @@ endif
 
 NAME_C		=	client
 NAME_S		=	server
-NAME_CB		=	client_bonus
-NAME_SB		=	server_bonus
 LIBFT_F		=	libft/
 LIBFT		=	libft.a
 CC 			=	cc
@@ -33,9 +31,7 @@ SLEEP		=	#sleep 0.5
 # SOURCES
 
 SRC_C		=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_CS)))
-SRC_CB		=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_CBS)))
 SRC_S		=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_SS)))
-SRC_SB		=	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_SBS)))
 
 # Source directories
 
@@ -44,9 +40,7 @@ SRC_DIR	=	src/
 # Minitalk functions
 
 SRC_CS		=	ft_client
-SRC_CBS		=	ft_client_bonus
 SRC_SS		= 	ft_server
-SRC_SBS		=	ft_server_bonus
 
 # Formating
 
@@ -86,11 +80,7 @@ all:			announce $(LIBFT) $(NAME_C) $(NAME_S)
 				@echo "$(GREEN)Amazing <<$(REVERSE)minitalk$(NRM_FORMAT)$(GREEN)>> compiled!$(NRM_FORMAT)"
 				
 
-bonus:			$(LIBFT) $(NAME_CB) $(NAME_SB)
-				@$(PRINT2)
-				@$(PRINT1)
-				@$(ECHO)
-				@echo "$(GREEN)Amazing <<$(REVERSE)bonus minitalk$(NRM_FORMAT)$(GREEN)>> compiled!$(NRM_FORMAT)"
+bonus:			all
 
 # MESSAGES 
 
@@ -117,14 +107,6 @@ $(NAME_C): 		$(OBJ_CS)
 				@$(ECHO)
 				@echo "$(RETURN)$(RETURN)$(GREEN)Client compiled!$(NRM_FORMAT)"
 
-$(NAME_CB): 	$(OBJ_CBS)
-				@echo "$(RETURN)$(RETURN)$(GREEN)Libft compilation complete!$(NRM_FORMAT)"
-				@$(CC) $(CFLAGS) $(SRC_CB) libft.a -o $(NAME_CB)
-				@$(PRINT2)
-				@$(PRINT1)
-				@$(ECHO)
-				@echo "$(RETURN)$(RETURN)$(GREEN)Bonus client compiled!$(NRM_FORMAT)"
-
 $(NAME_S): 		$(OBJ_SS)
 				@echo "$(RETURN)$(RETURN)$(GREEN)Libft compilation complete!$(NRM_FORMAT)"
 				@$(CC) $(CFLAGS) $(SRC_S) libft.a -o $(NAME_S)
@@ -132,14 +114,6 @@ $(NAME_S): 		$(OBJ_SS)
 				@$(PRINT1)
 				@$(ECHO)
 				@echo "$(RETURN)$(RETURN)$(GREEN)Server compiled!$(NRM_FORMAT)"
-
-$(NAME_SB): 	$(OBJ_SBS)
-				@echo "$(RETURN)$(RETURN)$(GREEN)Libft compilation complete!$(NRM_FORMAT)"
-				@$(CC) $(CFLAGS) $(SRC_SB) libft.a -o $(NAME_SB)
-				@$(PRINT2)
-				@$(PRINT1)
-				@$(ECHO)
-				@echo "$(RETURN)$(RETURN)$(GREEN)Bonus server compiled!$(NRM_FORMAT)"
 
 $(LIBFT):
 				@echo "$(RETURN)$(RETURN)$(YELLOW)Compiling LIBFT: $< $(NRM_FORMAT)"
@@ -166,8 +140,6 @@ fclean:			clean
 				@rm $(LIBFT)
 				@rm $(NAME_C)
 				@rm $(NAME_S)
-				@rm $(NAME_CB)
-				@rm $(NAME_SB)
 				@echo "$(RETURN)$(RED)Library and programs deleted!$(NRM_FORMAT)"
 				@$(PRINT2)
 				@$(PRINT1)
