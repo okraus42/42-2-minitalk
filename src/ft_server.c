@@ -6,7 +6,7 @@
 /*   By: okraus <okraus@student.42prague.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/13 15:36:48 by okraus            #+#    #+#             */
-/*   Updated: 2023/06/15 16:32:40 by okraus           ###   ########.fr       */
+/*   Updated: 2023/06/15 17:17:52 by okraus           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void	ft_handler2(siginfo_t *info, unsigned char c)
 	s[1] = 0;
 	if (c != 4)
 	{
-		//write(1, &c, 1);
 		if (g_s)
 		{
 			g_s = ft_strjoin_freeleft(g_s, s);
