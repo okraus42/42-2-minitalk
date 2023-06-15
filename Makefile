@@ -6,7 +6,7 @@
 #    By: okraus <okraus@student.42prague.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/03/04 15:40:17 by okraus            #+#    #+#              #
-#    Updated: 2023/06/15 17:11:49 by okraus           ###   ########.fr        #
+#    Updated: 2023/06/15 17:16:19 by okraus           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,7 +106,8 @@ $(NAME_C): 		$(OBJ_CS)
 				@$(PRINT1)
 				@$(ECHO)
 				@echo "$(RETURN)$(RETURN)$(GREEN)Client compiled!$(NRM_FORMAT)"
-				@echo ""
+				@echo " "
+				@echo " "
 
 $(NAME_S): 		$(OBJ_SS)
 				@echo "$(RETURN)$(RETURN)$(GREEN)Libft compilation complete!$(NRM_FORMAT)"
